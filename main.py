@@ -1,16 +1,17 @@
-# 这是一个示例 Python 脚本。
+import pygame
+import sys
 
-# 按 Shift+F10 执行或将其替换为您的代码。
-# 按 双击 Shift 在所有地方搜索类、文件、工具窗口、操作和设置。
+# 初始化pygame
+pygame.init()
+# 获取对显示系统的访问，并创建一个窗口screen
+# 窗口大小为670x670
+screen = pygame.display.set_mode((670, 670))
+screen_color = [238, 154, 73]  # 设置画布颜色,[238,154,73]对应为棕黄色
+line_color = [0, 0, 0]  # 设置线条颜色，[0,0,0]对应黑色
 
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            sys.exit()
 
-def print_hi(name):
-    # 在下面的代码行中使用断点来调试脚本。
-    print(f'Hi, {name}')  # 按 Ctrl+F8 切换断点。
-
-
-# 按间距中的绿色按钮以运行脚本。
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# 访问 https://www.jetbrains.com/help/pycharm/ 获取 PyCharm 帮助
+    pygame.display.update()
