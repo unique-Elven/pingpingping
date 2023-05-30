@@ -9,6 +9,7 @@ def scapy_ping(ip):
     for i in range(4):
         packet = IP(dst=ip, ttl=128) / ICMP()
         ping = sr1(packet, timeout=0.2, verbose=False)
+        print(ping)
         if not ping:
             loss += 1
     # 丢包率
