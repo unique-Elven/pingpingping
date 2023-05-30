@@ -1,2 +1,2 @@
 # pingpingping
-网络发现工具
+python网络发现工具
