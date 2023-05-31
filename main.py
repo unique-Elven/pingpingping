@@ -1,6 +1,10 @@
 import threading
+import time
 from tkinter import *
 from tkinter import messagebox
+from tkinter.ttk import Progressbar
+
+from scapy_network import *
 
 
 class Color:
@@ -15,16 +19,29 @@ class Color:
 class MyGui:
     def __init__(self, windows):
         self.windows = windows
+        self.t = time.localtime()
 
     def set_windows(self):
         root.resizable(False, False)
-        self.windows.config(bg=Color.WHITE)
+        self.windows.config(bg=Color.SILVER)
         self.windows.title("PingPingPing")
         self.windows.geometry('500x350')
         self.pingE = Entry(root, font=('Times', 15))
         self.pingE.place(x=125, y=120, width=200, height=35)
-        self.pingB = Button(root, text="Ping", font=("Times", 15), bg='#DDDDDD')
+        self.pingB = Button(root, text="Ping", font=("Times", 15), relief=RIDGE, command=self.ping_run)
         self.pingB.place(x=325, y=120, width=60, height=35)
+        self.pingT = Text(root, font=('Times', 12))
+        self.pingT.place(x=100, y=200, width=320, height=100)
+
+    def ping_run(self):
+        self.pingT.insert(END, f'正在Ping {self.pingE.get()}\n')
+        self.pingT.update()
+        state, loss = scapy_ping(self.pingE.get())
+        if state:
+            s = self.pingE.get() + f'连通！丢包率：{loss}\n'
+        else:
+            s = self.pingE.get() + f'无法连通！丢包率：{loss}\n'
+        self.pingT.insert(END, s)
 
     def basic_background(self):
         pass

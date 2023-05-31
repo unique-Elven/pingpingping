@@ -6,12 +6,16 @@ import time
 
 def scapy_ping(ip):
     loss = 0
+    ip = str(ip)
     for i in range(4):
         packets = IP(dst=ip, ttl=128) / ICMP()
         ping = sr1(packets, timeout=0.2, verbose=False)
         if not ping:
-            print('no')
             loss += 1
+            continue
+        if ping[ICMP].type:
+            loss += 1
+
     # 丢包率
     probability = str(loss / 4 * 100) + '%'
     if probability == '100.0%':
@@ -20,4 +24,4 @@ def scapy_ping(ip):
 
 
 if __name__ == '__main__':
-    print(scapy_ping('192.168.18.193'))
+    print(scapy_ping('192.168.18.191'))
