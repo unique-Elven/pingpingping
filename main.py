@@ -18,19 +18,20 @@ class Color:
 
 
 class Interface:
-    def __init__(self):
-        self.root = Tk()
-        self.root.config(bg='#CCCCCC')
-        self.root.title("PingPingPing")
-        self.root.geometry('350x220')
+    def __init__(self, windows):
+        self.windows = windows
+        self.windows.config(bg='#CCCCCC')
+        self.windows.title("PingPingPing")
+        self.windows.geometry('350x220')
 
     def basic_background(self):
         pass
 
-    def mainloop(self):
-        self.root.mainloop()
+    def run(self):
+        self.windows.mainloop()
 
 
 if __name__ == '__main__':
-    game = Interface()
-    game.mainloop()
+    root = Tk()
+    gui = Interface(root)
+    gui.run()
